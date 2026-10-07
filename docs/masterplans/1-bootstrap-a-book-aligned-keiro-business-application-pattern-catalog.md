@@ -1,0 +1,71 @@
+---
+id: 1
+slug: bootstrap-a-book-aligned-keiro-business-application-pattern-catalog
+title: "Bootstrap a book-aligned Keiro business application pattern catalog"
+kind: master-plan
+created_at: 2026-10-07T16:09:31Z
+intention: "intention_01m4bhvpbsecpb5487rqdjwwkg"
+provenance:
+  created_by:
+    model: "gpt-6-astra"
+    harness: "codex-cli"
+    at: 2026-10-07T16:09:31Z
+---
+
+# Bootstrap a book-aligned Keiro business application pattern catalog
+
+This MasterPlan is a living coordination document. Child plans own implementation progress. Update durable architectural decisions in `docs/adr/` during implementation.
+
+## Vision & Scope
+
+Create a discoverable, validated Open Knowledge Format (OKF) catalog that helps an application author apply Peter Royal's *Building Modern Business Applications* to the Keiro runtime. Readers should be able to start from a business use case, select the existing runtime standards, understand the additional application contract, and follow a worked command-to-screen flow with explicit failure and recovery behavior.
+
+The catalog supplements `mori://shinzui/keiro-runtime-patterns`. That repository remains the normative owner of runtime mechanics. This repository owns book-to-runtime interpretation, application composition, and explicitly justified departures. Every recommendation must identify whether it is inherited, supplemental, divergent, or an unsupported capability gap. A different implementation technology alone does not imply a different business principle.
+
+Included are adoption of the shared OKF pattern profile, Mori registration, authoring and validation conventions, a complete source coverage map, focused command/workflow and read-side patterns, and a reproducible scenario walkthrough. Excluded are runtime library changes, a second runtime standards library, a production application, a new frontend framework, deployments, and a bespoke shared OKF profile. Minimal example code is appropriate only where needed to substantiate an application contract; illustrative code must be labeled.
+
+The supplied source is `mori://shinzui/event-sourcing-full-app-patterns`, whose registered checkout contains chapter notes, platform adaptations, additional frontend guidance, and the book PDF. Do not attribute Message DB, Kafka, Relay, or a note author's recommendation automatically to the book. Record chapter evidence separately from those adaptations. The local repository is currently a scaffold: `.seihou/config.dhall`, installed planning skills, and Git configuration; no catalog, Mori manifest, validation script, or local ADR corpus exists. Its remote and Seihou name are `keiro-runtime-business-application-patterns`; use intended project identity `mori://shinzui/keiro-runtime-business-application-patterns`, verifying registration during bootstrap rather than deriving identity from the misspelled checkout directory.
+
+## Decomposition Strategy
+
+Three work streams separate the catalog contract from two user journeys. Bootstrap establishes valid authoring, source ownership, and coverage decisions. Command composition makes business intent and outcomes precise. Read-side composition explains what the user sees and reconciles the full flow. Splitting each chapter into a child would create many coupled documents without independent outcomes; combining all content with bootstrap would hide the source and validation boundary.
+
+No local ADRs existed at creation. Relevant consulted decisions are `mori://shinzui/keiro-runtime-patterns/okf/adrs/concepts/ADR-6` (one normative documentation owner), `mori://shinzui/keiro-runtime-patterns/okf/adrs/concepts/ADR-8` (isolated catalog, shared profile, generated indexes and logs), and `mori://shinzui/keiro-runtime-patterns/okf/adrs/concepts/ADR-3` (choose local event consumption, jobs, and integration transport by failure semantics). Their handles resolved with Mori during creation. Their historical package/version statements are evidence to recheck, not release pins for this initiative.
+
+## Exec-Plan Registry
+
+| # | Title | Path | Hard Deps | Soft Deps | Status |
+|---|-------|------|-----------|-----------|--------|
+| 1 | Bootstrap the OKF catalog and book-to-runtime coverage map | docs/plans/1-bootstrap-the-okf-catalog-and-book-to-runtime-coverage-map.md | None | None | Not Started |
+| 2 | Document business command and workflow composition patterns | docs/plans/2-document-business-command-and-workflow-composition-patterns.md | EP-1 | None | Not Started |
+| 3 | Document read-side application patterns and verify the complete flow | docs/plans/3-document-read-side-application-patterns-and-verify-the-complete-flow.md | EP-1; EP-2 M1 for M2 only | EP-2 whole-child completion | Not Started |
+
+## Dependency Graph
+
+Execute EP-1, then EP-2, then EP-3 by default. EP-1 must be Complete before either content child starts: its accepted profile, coverage map, source conventions, and checker are prerequisites. EP-3 M1 may proceed independently of EP-2 after EP-1. EP-3 M2, the integrated example, requires EP-2 M1's accepted command outcome contract at `business-patterns/commands/outcomes-and-visibility.md`. EP-2's remaining workflow guidance is a soft dependency for drafting read-side content, but all children must be Complete before initiative completion. This graph has no reverse hard dependency.
+
+## Integration Points
+
+EP-1 owns `mori.dhall`, `okf/business-patterns.dhall`, `scripts/check-business-patterns`, `justfile`, CI wiring, `README.md`, `business-patterns/getting-started.md`, `business-patterns/architecture/source-map.md`, and `business-patterns/architecture/authoring-contract.md`. Later children add their own DocRefs and source-map outcomes through that established contract; they do not redefine metadata or validation. Generated indexes and logs are maintained by every child for its changed concepts. EP-1 owns their conventions, and final index/log reconciliation belongs to EP-3.
+
+The source map records source URI and chapter/section, distinction between book and local adaptation, runtime owner URI, disposition, local destination if any, rationale, and evidence status. Each new concept cites its nearest runtime counterpart and explains the incremental application value. `inherits` means link only; `supplements` means an additional application decision; `diverges` means a scoped alternative with consequences and a selection rule; `gap` means unsupported behavior with a truthful fallback. Absence of implementation evidence must not be disguised as a divergence.
+
+EP-2 owns the command outcome and visibility contract; EP-3 consumes it. It must distinguish request identity, accepted/rejected/no-op outcomes, unknown or pending disposition, append completion, and read visibility. It must not treat a stream revision, global position, or read-model watermark as interchangeable. EP-3 owns the example at `business-patterns/examples/chapter-activation.md` and acceptance evidence under `docs/validation/`. Before expanding example variants, EP-3 M2 traces one accepted activation from command receipt to an authorized query result using the actual source-verified runtime boundary. That check must expose any mismatch between outcome and freshness assumptions.
+
+During EP-1, record the catalog ownership and source-layering decisions in local ADRs; subsequent children record justified architectural departures. Follow `agents/skills/exec-plan/ADR.md` and preserve the ADR convention established at bootstrap. Do not introduce ADR profile adoption as an incidental requirement. At final acceptance, distill durable decisions from all plans into the local ADR corpus.
+
+## Progress
+
+Planning complete on 2026-10-07; all three implementation children are Not Started. EP-1 is ready. Content work waits for its accepted catalog contract. Final integration requires source coverage closure, no duplicate normative runtime guidance, a consistent command-to-screen walkthrough, and passing repository checks. All four plans carry intention `intention_01m4bhvpbsecpb5487rqdjwwkg`.
+
+## Surprises & Discoveries
+
+## Decision Log
+
+2026-10-07: Adopt the shared pattern catalog profile through a local descriptor instead of creating a new profile. This preserves existing OKF interoperability and keeps application-specific comparison requirements in an authoring contract and focused validation.
+
+2026-10-07: Treat the book notes, their prior platform translation, and Keiro runtime guidance as three distinct evidence layers. The notes explicitly target Message DB and contain illustrative snippets; copying them would falsely imply current Keiro APIs.
+
+2026-10-07: Reuse runtime request-receipt and freshness standards. The inspected runtime command-cycle and read-model documents already cover these mechanisms; this catalog must add application composition and selection guidance, not restate those standards.
+
+## Outcomes & Retrospective
