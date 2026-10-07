@@ -43,8 +43,8 @@ No local ADRs existed at creation. Relevant consulted decisions are `mori://shin
 | # | Title | Path | Hard Deps | Soft Deps | Status |
 |---|-------|------|-----------|-----------|--------|
 | 1 | Bootstrap the OKF catalog and book-to-runtime coverage map | docs/plans/1-bootstrap-the-okf-catalog-and-book-to-runtime-coverage-map.md | None | None | Complete |
-| 2 | Document business command and workflow composition patterns | docs/plans/2-document-business-command-and-workflow-composition-patterns.md | EP-1 | None | In Progress |
-| 3 | Document read-side application patterns and verify the complete flow | docs/plans/3-document-read-side-application-patterns-and-verify-the-complete-flow.md | EP-1; EP-2 M1 for M2 only | EP-2 whole-child completion | Not Started |
+| 2 | Document business command and workflow composition patterns | docs/plans/2-document-business-command-and-workflow-composition-patterns.md | EP-1 | None | Complete |
+| 3 | Document read-side application patterns and verify the complete flow | docs/plans/3-document-read-side-application-patterns-and-verify-the-complete-flow.md | EP-1; EP-2 M1 for M2 only | EP-2 whole-child completion | In Progress |
 
 ## Dependency Graph
 
@@ -62,7 +62,7 @@ During EP-1, record the catalog ownership and source-layering decisions in local
 
 ## Progress
 
-EP-1 completed on 2026-10-07 with a validated three-concept catalog, 22-source map, four negative-check fixtures, and local Mori discovery. EP-2 is In Progress; EP-3 remains Not Started. Final integration still requires command/read contract reconciliation, published coverage destinations, and non-duplication review.
+EP-1 and EP-2 completed on 2026-10-07. Seven concepts validate, and the command outcome contract is accepted and Mori-resolvable. EP-3 is In Progress with its prerequisites satisfied. Final integration requires read-side patterns, the command-to-screen walkthrough, published source coverage, and final non-duplication review.
 
 ## Surprises & Discoveries
 

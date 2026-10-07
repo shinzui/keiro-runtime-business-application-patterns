@@ -27,8 +27,8 @@ An application author can translate a user intent into a complete command, choos
 
 ## Progress
 
-- [ ] M1: Command-to-outcome guidance and the shared visibility contract are source-verified and validate as catalog concepts.
-- [ ] M2: Business time, automation, and side-effect guidance closes its assigned coverage with explicit tradeoffs and failure traces.
+- [x] M1: Command-to-outcome guidance and the shared visibility contract are source-verified and validate as catalog concepts.
+- [x] M2: Business time, automation, and side-effect guidance closes its assigned coverage with explicit tradeoffs and failure traces.
 
 ## Surprises & Discoveries
 
@@ -37,6 +37,8 @@ An application author can translate a user intent into a complete command, choos
 2026-10-07: Application guidance composes the existing runtime receipt and command-cycle rules. It must not create a competing universal receipt implementation or claim every command needs a durable command log.
 
 ## Outcomes & Retrospective
+
+Completed 2026-10-07: four supplemental patterns, published source-map destinations, and the shared outcome contract pass seven-concept validation. Mori resolves the contract; [command evidence](../validation/command-composition.md) records the reviewed runtime branches and all required traces. [ADR-2](../adr/0002-separate-command-disposition-from-read-visibility.md) captures durable application boundaries. Runtime test source was inspected, not executed; no production receipt service is claimed.
 
 ## Context and Orientation
 

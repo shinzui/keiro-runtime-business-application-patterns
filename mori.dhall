@@ -39,6 +39,38 @@ in  Schema.Project::{
       ]
     , docs =
       [ Schema.DocRef::{
+        , key = "workflows-effects-and-integration"
+        , kind = Schema.DocKind.Pattern
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "business-patterns/workflows/effects-and-integration.md"
+        }
+      , Schema.DocRef::{
+        , key = "workflows-time-and-automation"
+        , kind = Schema.DocKind.Pattern
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "business-patterns/workflows/time-and-automation.md"
+        }
+      , Schema.DocRef::{
+        , key = "commands-outcomes-and-visibility"
+        , kind = Schema.DocKind.Pattern
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "business-patterns/commands/outcomes-and-visibility.md"
+        }
+      , Schema.DocRef::{
+        , key = "commands-generation-and-processing"
+        , kind = Schema.DocKind.Pattern
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "business-patterns/commands/generation-and-processing.md"
+        }
+      , Schema.DocRef::{
         , key = "getting-started"
         , kind = Schema.DocKind.Guide
         , audience = Schema.DocAudience.Module
