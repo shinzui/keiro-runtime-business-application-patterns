@@ -1,0 +1,29 @@
+name: Business application patterns
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.13
+      - name: Validate catalog
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [[ -n "$BASE_REF" && "$BASE_REF" != "0000000000000000000000000000000000000000" ]]; then
+            args+=("$BASE_REF")
+          fi
+          nix shell github:shinzui/okf/b57510200f949a72d48cb009d932be1d1cc11888#okf-cli \
+            nixpkgs#dhall nixpkgs#dhall-json nixpkgs#just \
+            -c just check-docs "${args[@]}"

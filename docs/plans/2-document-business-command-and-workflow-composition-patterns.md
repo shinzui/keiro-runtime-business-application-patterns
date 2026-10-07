@@ -11,6 +11,12 @@ provenance:
     model: "gpt-6-astra"
     harness: "codex-cli"
     at: 2026-10-07T16:09:44Z
+  revisions:
+    - model: "gpt-6-astra"
+      harness: "codex-cli"
+      at: 2026-10-07T16:23:18Z
+      mode: "implement"
+      note: "Implement application command outcomes, time, and effect composition guidance"
 ---
 
 # Document business command and workflow composition patterns

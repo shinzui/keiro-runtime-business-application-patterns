@@ -20,7 +20,48 @@ in  Schema.Project::{
         , github = Some "shinzui/keiro-runtime-business-application-patterns"
         }
       ]
-    , dependencies = [ "shinzui/keiro-runtime-patterns" ]
+    , dependencies =
+      [ "shinzui/keiro-runtime-patterns"
+      , "shinzui/event-sourcing-full-app-patterns"
+      , "shinzui/okf-profiles"
+      , "shinzui/keiro"
+      ]
+    , okfBundles =
+      [ Schema.OkfBundle::{
+        , name = "business-patterns"
+        , path = "business-patterns"
+        , profileBinding = Some
+            (Schema.ProfileBinding.Local "okf/business-patterns.dhall")
+        , okfVersion = "0.2"
+        , description = Some
+            "Book-aligned application compositions supplementing the Keiro runtime catalog"
+        }
+      ]
+    , docs =
+      [ Schema.DocRef::{
+        , key = "getting-started"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile "business-patterns/getting-started.md"
+        }
+      , Schema.DocRef::{
+        , key = "architecture-authoring-contract"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "business-patterns/architecture/authoring-contract.md"
+        }
+      , Schema.DocRef::{
+        , key = "architecture-source-map"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "business-patterns/architecture/source-map.md"
+        }
+      ]
     , dependencyRefs =
       [ Schema.MoriRef::{
         , namespace = "shinzui"

@@ -11,6 +11,12 @@ provenance:
     model: "gpt-6-astra"
     harness: "codex-cli"
     at: 2026-10-07T16:09:44Z
+  revisions:
+    - model: "gpt-6-astra"
+      harness: "codex-cli"
+      at: 2026-10-07T16:21:20Z
+      mode: "implement"
+      note: "Bootstrap shared profile, source map, Mori discovery, and validation"
 ---
 
 # Bootstrap the OKF catalog and book-to-runtime coverage map
@@ -21,16 +27,20 @@ An author can discover the new business application catalog, understand its boun
 
 ## Progress
 
-- [ ] M1: A small profiled catalog is discoverable and passes strict validation, including an invalid-document rejection check.
-- [ ] M2: Source coverage and authoring rules distinguish book principles, prior platform choices, and current runtime ownership.
+- [x] M1: A small profiled catalog is discoverable and passes strict validation, including an invalid-document rejection check.
+- [x] M2: Source coverage and authoring rules distinguish book principles, prior platform choices, and current runtime ownership.
 
 ## Surprises & Discoveries
+
+2026-10-07: Mori identity and a current schema pin already existed at implementation start; extended them without changing the stable ID. The profile release is tag/changelog-based, with no GitHub Release object or Mori release fact.
 
 ## Decision Log
 
 2026-10-07: Reuse `documentation.patternCatalog`; do not fork its metadata schema. Local editorial requirements govern the supplemental relationship.
 
 ## Outcomes & Retrospective
+
+Completed 2026-10-07. Three catalog concepts pass strict validation and all 22 source documents have dispositions. Four rejection fixtures and local Mori resolution passed; see [bootstrap evidence](../validation/catalog-bootstrap.md). Durable ownership and evidence boundaries are captured in [ADR-1](../adr/0001-supplement-runtime-patterns-with-book-aligned-application-contracts.md). CI is configured but its hosted run is not claimed.
 
 ## Context and Orientation
 
