@@ -4,7 +4,7 @@ title: "Read a business view with scoped freshness"
 description: "Choose what a screen can truthfully claim after a command or projection rebuild."
 generated:
   by: process:codex
-  at: "2026-10-07T16:42:00Z"
+  at: "2026-10-07T16:53:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/reads-materialization-and-freshness
 tags: [business-applications, keiro, composition]
 status: current
@@ -32,6 +32,23 @@ The [materializer notes](mori://shinzui/event-sourcing-full-app-patterns/docs/ev
 Inherit [read models and projections](mori://shinzui/keiro-runtime-patterns/docs/keiro-read-models-and-projections), [catalogs](mori://shinzui/keiro-runtime-patterns/docs/keiro-projection-catalogs), and [transactional projections](mori://shinzui/keiro-runtime-patterns/docs/kiroku-transactions-and-projections). They own query builders, cursor authority, catalog lifecycle, inline/async delivery, deduplication, and rebuild procedures. This pattern defines how the application chooses and reports the resulting guarantees.
 
 ## Application recommendation
+
+Choose a freshness path from the model’s actual capabilities and the command’s result, rather than from a generic success flag.
+
+```mermaid
+flowchart TD
+    A["Authorized read after command"] --> B{"New commit position?"}
+    B -->|No: silent outcome| C["Independent sanctioned read"]
+    B -->|Yes| D{"Matching durable cursor?"}
+    D -->|Yes| E["Bounded wait for scoped position"]
+    D -->|No| F["Use supported immediate read or predicate"]
+    E --> G{"Wait and guarded read succeed?"}
+    G -->|Yes| H["Report view visible"]
+    G -->|Timeout or unavailable| I["Keep acceptance; retry read"]
+    F --> J["Do not claim an unproven wait guarantee"]
+```
+
+All paths retain model lifecycle checks and application authorization. A position from another source is invalid for this wait; a cursorless model cannot satisfy it by inventing a cursor.
 
 Design a chapter detail view around the screen: identity, activity state, relevant configuration, authorized actions, and a model revision. The query shape is not a raw domain event shape. Derived values must be reproducible from recorded inputs; display formatting can remain at the presentation boundary. A projection replay must not become a second notification workflow.
 

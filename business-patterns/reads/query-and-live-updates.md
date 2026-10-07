@@ -4,7 +4,7 @@ title: "Load a snapshot and reconcile live updates"
 description: "Close the query-to-subscription gap and recover safely when browser notifications are not durable."
 generated:
   by: process:codex
-  at: "2026-10-07T16:25:00Z"
+  at: "2026-10-07T16:53:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/reads-query-and-live-updates
 tags: [business-applications, keiro, composition]
 status: current
@@ -35,6 +35,33 @@ The [materializer notes](mori://shinzui/event-sourcing-full-app-patterns/docs/ev
 Inherit [read-model semantics](mori://shinzui/keiro-runtime-patterns/docs/keiro-read-models-and-projections) and [private event consumption](mori://shinzui/keiro-runtime-patterns/docs/messaging-kiroku-subscriptions). A server-side event cursor is not automatically a resumable browser cursor. Neither standard supplies an application GraphQL/Relay server or certifies its end-user authorization. The local contribution is the handoff and recovery protocol at that boundary.
 
 ## Application recommendation
+
+The second query closes the attachment gap. Notifications received during reconciliation must survive until another read can consume them.
+
+```mermaid
+sequenceDiagram
+    participant UI as Screen
+    participant Read as Authorized read service
+    participant Live as Live channel
+    UI->>Read: Initial query
+    Read-->>UI: Snapshot at revision 7
+    Note over UI,Live: View changes before attachment
+    UI->>Live: Subscribe with authorization
+    Live-->>UI: Attachment acknowledged
+    UI->>Read: Reconciliation query
+    opt Invalidation while query is in flight
+        Live-->>UI: View may have changed
+        Note over UI: Keep dirty flag
+    end
+    Read-->>UI: Current snapshot
+    Note over UI: Guard against late older responses
+    opt Dirty flag was set
+        UI->>Read: Query again
+        Read-->>UI: Refreshed snapshot
+    end
+```
+
+This is an invalidation protocol, not a durable event stream. Reauthorize and reconcile on reconnect; successful fallback refreshes recover missed hints after attachment.
 
 Prefer an authorized route-level query for the first useful screen. Let components consume normalized identities and bounded connections as the [Relay guide](mori://shinzui/event-sourcing-full-app-patterns/docs/frontend-relay-patterns) describes; do not create one independent live stream per component. Attach live updates only where the user benefits.
 

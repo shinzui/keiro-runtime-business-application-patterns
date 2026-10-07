@@ -4,7 +4,7 @@ title: "Separate command disposition from read visibility"
 description: "Expose a truthful operation result without confusing a committed write with a fresh screen."
 generated:
   by: process:codex
-  at: "2026-10-07T16:25:00Z"
+  at: "2026-10-07T16:53:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/commands-outcomes-and-visibility
 tags: [business-applications, keiro, composition]
 status: current
@@ -31,6 +31,25 @@ The [generator notes](mori://shinzui/event-sourcing-full-app-patterns/docs/comma
 Inherit [command cycle and errors](mori://shinzui/keiro-runtime-patterns/docs/keiro-command-cycle-and-errors) for request receipts and domain outcomes, and [read models and projections](mori://shinzui/keiro-runtime-patterns/docs/keiro-read-models-and-projections) for actual waiting and guarded reads. The runtime supplies transaction/append primitives. The application owns operation lookup, authorization, receipt retention, and the external result vocabulary.
 
 ## Application recommendation
+
+An accepted command and its view can be in different states. Follow the read branch without changing the committed command result.
+
+```mermaid
+flowchart TD
+    A["Command result known"] --> B{"Disposition"}
+    B -->|Accepted| C["Committed in Kiroku"]
+    B -->|Rejected or no-op| D["No new append position"]
+    C --> E["Authorized read with valid scope"]
+    E --> F{"View ready?"}
+    F -->|Yes| G["Accepted + visible"]
+    F -->|Not yet| H["Accepted + waiting"]
+    F -->|Cannot serve| I["Accepted + unavailable"]
+    D --> J["Read independently if needed"]
+    H -.->|Refresh read| E
+    I -.->|Recover read service| E
+```
+
+Pending or unknown results require authorized operation-status lookup first. Visibility retries do not resubmit the command, and silent outcomes never acquire a synthetic position.
 
 Keep operation disposition and visibility as separate values. An accepted domain result means its nonempty event batch committed; it does not mean a notification was sent or a screen is fresh. Pending means durable intake is known but no final decision is yet available. Unknown means the observer cannot establish a durable result; it is not a negative business decision.
 

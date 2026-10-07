@@ -4,7 +4,7 @@ title: "Separate activation from its external consequences"
 description: "Keep committed business facts independent from retryable notifications and public integration events."
 generated:
   by: process:codex
-  at: "2026-10-07T16:42:00Z"
+  at: "2026-10-07T16:53:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/workflows-effects-and-integration
 tags: [business-applications, keiro, composition]
 status: current
@@ -32,6 +32,24 @@ The [business-rule notes](mori://shinzui/event-sourcing-full-app-patterns/docs/w
 Inherit [outbox](mori://shinzui/keiro-runtime-patterns/docs/messaging-outbox), [inbox](mori://shinzui/keiro-runtime-patterns/docs/messaging-inbox), [transport selection](mori://shinzui/keiro-runtime-patterns/docs/messaging-transport-selection), and [durable workflows](mori://shinzui/keiro-runtime-patterns/docs/keiro-durable-workflows). They own delivery, deduplication, and failure semantics. The local addition is deciding which consequence affects the application's user-visible success and what to do when systems disagree temporarily.
 
 ## Application recommendation
+
+Activation, its materialized view, and its external consequences progress independently after the business fact commits.
+
+```mermaid
+flowchart TD
+    A["Activation decision"] --> B["Committed fact in Kiroku"]
+    B --> C["Replayable materialization"]
+    C --> D["Authorized chapter view"]
+    B --> E["Durable consequence work"]
+    E --> F["Notification worker"]
+    E --> G["Public integration publisher"]
+    F --> H["External provider"]
+    G --> I["Other bounded context"]
+    H -.->|Outcome or uncertainty| J["Separate delivery status"]
+    I -.->|Outcome or uncertainty| J
+```
+
+The arrows express responsibility, not independent dual writes. Use the sanctioned transactional/outbox or workflow composition to record consequence work. Rebuilding the view does not replay the external-effect branch.
 
 Commit the activation fact under its owning aggregate. Represent required notification work durably and separately, using the sanctioned transaction/outbox or workflow composition appropriate to the existing runtime. Give the external operation a stable key derived from the business consequence identity, not a retry counter. Show activation status separately from notification status. Do not put SMTP/HTTP calls into the pure decision or treat a read-model rebuild as a request to resend email.
 

@@ -4,7 +4,7 @@ title: "Generate a complete business command"
 description: "Choose direct or durable command processing while keeping the business decision deterministic."
 generated:
   by: process:codex
-  at: "2026-10-07T16:42:00Z"
+  at: "2026-10-07T16:53:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/commands-generation-and-processing
 tags: [business-applications, keiro, composition]
 status: current
@@ -32,6 +32,26 @@ The chapter notes on [business rules](mori://shinzui/event-sourcing-full-app-pat
 Inherit [domain design](mori://shinzui/keiro-runtime-patterns/docs/architecture-domain-design) and the [command cycle](mori://shinzui/keiro-runtime-patterns/docs/keiro-command-cycle-and-errors). They own aggregate boundaries, concurrency, runtime errors, silent outcomes, and receipt mechanics. The local addition is selecting a request topology and assigning application responsibilities across it.
 
 ## Application recommendation
+
+The intake choice changes when the caller gets a final result; both routes reach the same owning service and domain decision.
+
+```mermaid
+flowchart TD
+    A["Authorized business intent"] --> B["Validate and capture inputs"]
+    B --> C{"Durable backlog needed?"}
+    C -->|No| D["Direct processing"]
+    C -->|Yes| E["Persist command intake"]
+    E --> F["Return pending; worker resumes"]
+    F --> G["Owning service: pure decision"]
+    D --> G
+    G --> H{"Domain outcome"}
+    H -->|Accepted batch| I["Commit events in Kiroku"]
+    H -->|Rejected or no-op| J["No event append"]
+    I --> K["Report final disposition"]
+    J --> K
+```
+
+Authorization, stale-edit policy, and repeatable request receipts remain application obligations. A queued command is pending until its domain outcome is known.
 
 For a short operation on one aggregate, let the owning application service process the complete command directly, returning a final business disposition only after the runtime reports the committed or silent outcome. Use durable asynchronous submission when offline processing, durable backlog, or processing beyond the request deadline is a business requirement. Submission then means **queued/pending**, not business acceptance. A durable input plus an authorized result lookup and progress worker are application-owned requirements; a runtime command runner alone is not a command-log service.
 
