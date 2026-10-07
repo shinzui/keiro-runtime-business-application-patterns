@@ -30,7 +30,7 @@ The catalog supplements `mori://shinzui/keiro-runtime-patterns`. That repository
 
 Included are adoption of the shared OKF pattern profile, Mori registration, authoring and validation conventions, a complete source coverage map, focused command/workflow and read-side patterns, and a reproducible scenario walkthrough. Excluded are runtime library changes, a second runtime standards library, a production application, a new frontend framework, deployments, and a bespoke shared OKF profile. Minimal example code is appropriate only where needed to substantiate an application contract; illustrative code must be labeled.
 
-The supplied source is `mori://shinzui/event-sourcing-full-app-patterns`, whose registered checkout contains chapter notes, platform adaptations, additional frontend guidance, and the book PDF. Do not attribute Message DB, Kafka, Relay, or a note author's recommendation automatically to the book. Record chapter evidence separately from those adaptations. The local repository is currently a scaffold: `.seihou/config.dhall`, installed planning skills, and Git configuration; no catalog, Mori manifest, validation script, or local ADR corpus exists. Its remote and Seihou name are `keiro-runtime-business-application-patterns`; use intended project identity `mori://shinzui/keiro-runtime-business-application-patterns`, verifying registration during bootstrap rather than deriving identity from the misspelled checkout directory.
+The supplied source is `mori://shinzui/event-sourcing-full-app-patterns`, whose registered checkout contains chapter notes, platform adaptations, additional frontend guidance, and the book PDF. Do not attribute Message DB, Kafka, Relay, or a note author's recommendation automatically to the book. Record chapter evidence separately from those adaptations. At plan creation the inspected repository appeared to be a scaffold: `.seihou/config.dhall`, installed planning skills, and Git configuration; no catalog, validation script, or local ADR corpus was present; implementation subsequently found and preserved the existing Mori manifest and stable identity. Its remote and Seihou name are `keiro-runtime-business-application-patterns`; use intended project identity `mori://shinzui/keiro-runtime-business-application-patterns`, verifying registration during bootstrap rather than deriving identity from the misspelled checkout directory.
 
 ## Decomposition Strategy
 
@@ -44,7 +44,7 @@ No local ADRs existed at creation. Relevant consulted decisions are `mori://shin
 |---|-------|------|-----------|-----------|--------|
 | 1 | Bootstrap the OKF catalog and book-to-runtime coverage map | docs/plans/1-bootstrap-the-okf-catalog-and-book-to-runtime-coverage-map.md | None | None | Complete |
 | 2 | Document business command and workflow composition patterns | docs/plans/2-document-business-command-and-workflow-composition-patterns.md | EP-1 | None | Complete |
-| 3 | Document read-side application patterns and verify the complete flow | docs/plans/3-document-read-side-application-patterns-and-verify-the-complete-flow.md | EP-1; EP-2 M1 for M2 only | EP-2 whole-child completion | In Progress |
+| 3 | Document read-side application patterns and verify the complete flow | docs/plans/3-document-read-side-application-patterns-and-verify-the-complete-flow.md | EP-1; EP-2 M1 for M2 only | EP-2 whole-child completion | Complete |
 
 ## Dependency Graph
 
@@ -62,9 +62,11 @@ During EP-1, record the catalog ownership and source-layering decisions in local
 
 ## Progress
 
-EP-1 and EP-2 completed on 2026-10-07. Seven concepts validate, and the command outcome contract is accepted and Mori-resolvable. EP-3 is In Progress with its prerequisites satisfied. Final integration requires read-side patterns, the command-to-screen walkthrough, published source coverage, and final non-duplication review.
+All three children are Complete as of 2026-10-07. The catalog has 10 concepts and complete dispositions for 22 sources; all 51 unique Mori references resolve. Complete-mode validation, five rejection fixtures, and the 24-ordering screen experiment passed. Cross-plan outcome/visibility and source-ownership checks are accepted, and durable context is distilled in local ADRs 1–3. Hosted CI is configured but has not been run in this session.
 
 ## Surprises & Discoveries
+
+2026-10-07: Implementation found an existing Mori manifest and stable identity and extended them in place. Runtime source confirms no-op/rejection paths skip append callbacks; the consumer contract therefore never invents a position for them. The query-first handoff model found five naive counterexamples, supporting explicit attachment reconciliation and response guarding.
 
 ## Decision Log
 
@@ -75,3 +77,7 @@ EP-1 and EP-2 completed on 2026-10-07. Seven concepts validate, and the command 
 2026-10-07: Reuse runtime request-receipt and freshness standards. The inspected runtime command-cycle and read-model documents already cover these mechanisms; this catalog must add application composition and selection guidance, not restate those standards.
 
 ## Outcomes & Retrospective
+
+Delivered a shared-profile OKF catalog with stable Mori discovery, generated navigation, strict checks and CI wiring, seven application patterns, a 22-source ownership map, and a complete activation walkthrough. The existing runtime library remains the normative mechanics owner. Direct command processing and the conditional snapshot-stream alternative are explicitly distinguished from source-note topology choices; durable-browser-stream gaps retain supported query/reconciliation fallbacks.
+
+Acceptance and limits are recorded in [flow evidence](../validation/business-application-flow.md). Local ADRs [1](../adr/0001-supplement-runtime-patterns-with-book-aligned-application-contracts.md), [2](../adr/0002-separate-command-disposition-from-read-visibility.md), and [3](../adr/0003-reconcile-live-screens-through-authorized-read-contracts.md) preserve ownership, outcome/visibility separation, and screen reconciliation. The result is documentation and a finite ordering model, not a production application or certification of unbuilt API glue.

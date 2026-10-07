@@ -39,6 +39,30 @@ in  Schema.Project::{
       ]
     , docs =
       [ Schema.DocRef::{
+        , key = "examples-chapter-activation"
+        , kind = Schema.DocKind.Pattern
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "business-patterns/examples/chapter-activation.md"
+        }
+      , Schema.DocRef::{
+        , key = "reads-query-and-live-updates"
+        , kind = Schema.DocKind.Pattern
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "business-patterns/reads/query-and-live-updates.md"
+        }
+      , Schema.DocRef::{
+        , key = "reads-materialization-and-freshness"
+        , kind = Schema.DocKind.Pattern
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "business-patterns/reads/materialization-and-freshness.md"
+        }
+      , Schema.DocRef::{
         , key = "workflows-effects-and-integration"
         , kind = Schema.DocKind.Pattern
         , audience = Schema.DocAudience.Module

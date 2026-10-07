@@ -21,3 +21,7 @@ On 2026-10-07, `just check-docs HEAD` passed for three concepts and 22 source ro
 `mori validate` passed the sealed two-file Dhall evaluation; `mori register --local` updated the existing project. The getting-started DocRef resolves to this checkout. The graph contains only catalog concepts, excluding plans and ADRs. The source-map's chapter processor, transport, and query/subscription rows were compared with their runtime owners: direct command processing is a scoped topology choice, transport stays inherited, and browser delivery is an application boundary with a documented gap.
 
 CI is configured to run the same checker via Nix with released OKF 0.10.0.0; hosted CI has not been executed in this local session. Local acceptance used installed OKF 0.9.0.0, which satisfies the profile release requirement.
+
+## Tooling follow-up
+
+At final validation the official Bun release API reported 1.4.2 as latest and the `bun-v1.3.13` tag was verified upstream. CI deliberately retains 1.3.13 to match the locally exercised YAML/parser behavior; it is a tested tool baseline, not a claim to be the newest release. Mori had no registered Bun corpus. Existing setup-bun v2 and checkout v4 tags were also verified. No upstream application library dependency bounds were selected.

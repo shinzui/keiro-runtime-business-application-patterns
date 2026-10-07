@@ -27,8 +27,8 @@ An application author can translate a user intent into a complete command, choos
 
 ## Progress
 
-- [x] M1: Command-to-outcome guidance and the shared visibility contract are source-verified and validate as catalog concepts.
-- [x] M2: Business time, automation, and side-effect guidance closes its assigned coverage with explicit tradeoffs and failure traces.
+- [x] M1: Command-to-outcome guidance and the shared visibility contract are source-verified and validate as catalog concepts. Accepted 2026-10-07; evidence is recorded in Outcomes & Retrospective.
+- [x] M2: Business time, automation, and side-effect guidance closes its assigned coverage with explicit tradeoffs and failure traces. Accepted 2026-10-07; evidence is recorded in Outcomes & Retrospective.
 
 ## Surprises & Discoveries
 

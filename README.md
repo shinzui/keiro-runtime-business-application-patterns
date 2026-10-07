@@ -13,6 +13,8 @@ just check-docs
 just check-docs HEAD
 # At final catalog acceptance, reject unfinished coverage:
 just check-docs --complete
+python3 scripts/check-screen-handoff.py
+python3 scripts/test-catalog-checks.py
 mori register --local
 mori path mori://shinzui/keiro-runtime-business-application-patterns/docs/getting-started
 ```

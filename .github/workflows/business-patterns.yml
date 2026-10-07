@@ -26,4 +26,8 @@ jobs:
           fi
           nix shell github:shinzui/okf/b57510200f949a72d48cb009d932be1d1cc11888#okf-cli \
             nixpkgs#dhall nixpkgs#dhall-json nixpkgs#just \
-            -c just check-docs "${args[@]}"
+            -c just check-docs "${args[@]}" --complete
+          python3 scripts/check-screen-handoff.py
+          nix shell github:shinzui/okf/b57510200f949a72d48cb009d932be1d1cc11888#okf-cli \
+            nixpkgs#dhall nixpkgs#dhall-json \
+            -c python3 scripts/test-catalog-checks.py

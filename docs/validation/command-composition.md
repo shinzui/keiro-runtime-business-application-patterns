@@ -13,7 +13,7 @@ Source locations below are project-relative within `mori://shinzui/keiro`; artif
 | Silent decisions bypass append callbacks | Same module, `domainSqlCommandAttempts` routes silent branch to `DomainSqlCommandSilent` | A universal receipt service is not provided |
 | Append and SQL callback share the controlled transaction | Same module, `domainSqlCommandAttempts`, `appendWithSqlOnce` | Does not make remote effects atomic |
 | Actual branches have regression tests | `keiro/test/Main.hs`, typed domain command outcomes: exact ordered accepted batch; sibling silent rejection/no-op; skips SQL callbacks and inline projections; applies inline projections atomically | Tests read, not rerun |
-| Durable steps need downstream idempotence | mori://shinzui/keiro-runtime-patterns/docs/keiro-durable-workflows, Run and replay the journal; `mori://shinzui/keiro` at project-relative `keiro/src/Keiro/Workflow.hs`, Step branch, executes `unlift action` before `appendJournal` (artifact handle pending) | A workflow is not exactly-once external execution |
+| Durable steps need downstream idempotence | mori://shinzui/keiro-runtime-patterns/docs/keiro-durable-workflows, Run and replay the journal; `mori://shinzui/keiro` at project-relative `keiro/src/Keiro/Workflow.hs`, Step branch, executes `unlift act` before `appendJournal` (artifact handle pending) | A workflow is not exactly-once external execution |
 
 ## Scenario review
 

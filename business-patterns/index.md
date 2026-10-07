@@ -6,6 +6,8 @@ okf_version: "0.2"
 
 - [architecture/](architecture/index.md)
 - [commands/](commands/index.md)
+- [examples/](examples/index.md)
+- [reads/](reads/index.md)
 - [workflows/](workflows/index.md)
 
 # Navigation

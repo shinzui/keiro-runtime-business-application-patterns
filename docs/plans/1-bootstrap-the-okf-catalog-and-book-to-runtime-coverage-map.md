@@ -27,8 +27,8 @@ An author can discover the new business application catalog, understand its boun
 
 ## Progress
 
-- [x] M1: A small profiled catalog is discoverable and passes strict validation, including an invalid-document rejection check.
-- [x] M2: Source coverage and authoring rules distinguish book principles, prior platform choices, and current runtime ownership.
+- [x] M1: A small profiled catalog is discoverable and passes strict validation, including an invalid-document rejection check. Accepted 2026-10-07; evidence is recorded in Outcomes & Retrospective.
+- [x] M2: Source coverage and authoring rules distinguish book principles, prior platform choices, and current runtime ownership. Accepted 2026-10-07; evidence is recorded in Outcomes & Retrospective.
 
 ## Surprises & Discoveries
 

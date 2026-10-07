@@ -26,6 +26,11 @@ def check(case):
             p = work / 'business-patterns/index.md'
             p.write_text(p.read_text() + '\nUnexpected manual edit\n')
             expected = 'Generated index is stale'
+        elif case == 'unfinished coverage':
+            source_map = work / 'business-patterns/architecture/source-map.md'
+            source_map.write_text(source_map.read_text().replace('\"state\": \"published\"', '\"state\": \"planned\"', 1))
+            args = ['--complete']
+            expected = 'Unfinished coverage'
         else:
             for cmd in [['git', 'init', '-q'], ['git', 'add', '.'],
                         ['git', '-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-qm', 'fixture']]:
@@ -41,5 +46,5 @@ def check(case):
 
 if __name__ == '__main__':
     with ThreadPoolExecutor(max_workers=4) as pool:
-        for result in pool.map(check, ['missing description', 'broken link', 'stale index', 'unlogged change']):
+        for result in pool.map(check, ['missing description', 'broken link', 'stale index', 'unlogged change', 'unfinished coverage']):
             print(result, flush=True)

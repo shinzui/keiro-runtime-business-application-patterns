@@ -11,6 +11,12 @@ provenance:
     model: "gpt-6-astra"
     harness: "codex-cli"
     at: 2026-10-07T16:09:44Z
+  revisions:
+    - model: "gpt-6-astra"
+      harness: "codex-cli"
+      at: 2026-10-07T16:28:17Z
+      mode: "implement"
+      note: "Implement read-side composition and complete-flow validation"
 ---
 
 # Document read-side application patterns and verify the complete flow
@@ -21,8 +27,8 @@ An application author can build a screen whose initial query, mutation result, p
 
 ## Progress
 
-- [ ] M1: Read-model, query, and subscription composition patterns have source-backed failure and recovery guidance.
-- [ ] M2: A complete command-to-screen walkthrough consumes the accepted outcome contract and closes catalog coverage and validation.
+- [x] M1: Read-model, query, and subscription composition patterns have source-backed failure and recovery guidance. Accepted 2026-10-07; evidence is recorded in Outcomes & Retrospective.
+- [x] M2: A complete command-to-screen walkthrough consumes the accepted outcome contract and closes catalog coverage and validation. Accepted 2026-10-07; evidence is recorded in Outcomes & Retrospective.
 
 ## Surprises & Discoveries
 
@@ -31,6 +37,8 @@ An application author can build a screen whose initial query, mutation result, p
 2026-10-07: Use a small reproducible walkthrough and scenario evidence to validate the documentation. A production reference application or a new frontend stack is outside scope.
 
 ## Outcomes & Retrospective
+
+Completed 2026-10-07. Two read-side patterns and the complete chapter activation walkthrough close the 22-source coverage map. Ten concepts pass strict complete-mode checks; 51 Mori references resolve. The finite screen model checks 24 orderings and five naive counterexamples, and five invalid catalog fixtures fail for the intended reasons. [Flow evidence](../validation/business-application-flow.md) records validation and source-inspection limits. Durable decisions from all three plans are distilled in local ADRs 1–3. No production application or upstream runtime test execution is claimed.
 
 ## Context and Orientation
 
