@@ -17,6 +17,11 @@ provenance:
       at: 2026-10-07T16:23:18Z
       mode: "implement"
       note: "Implement application command outcomes, time, and effect composition guidance"
+    - model: "gpt-6-astra"
+      harness: "codex-cli"
+      at: 2026-10-07T16:42:12Z
+      mode: "update"
+      note: "Apply Kiroku-only event-store terminology requested by the user"
 ---
 
 # Document business command and workflow composition patterns
@@ -44,7 +49,7 @@ Completed 2026-10-07: four supplemental patterns, published source-map destinati
 
 This repository starts as a scaffold with installed planning skills and `.seihou/config.dhall`; no application code or catalog existed when this plan was written. Open Knowledge Format (OKF) stores Markdown concepts with validated metadata, generated indexes, and update logs. A profile is the reusable validation contract, not a new runtime capability. Mori resolves canonical project and document identities to local source paths. Run commands from this repository root, obtained with `git rev-parse --show-toplevel`.
 
-Source authority is layered: `mori://shinzui/event-sourcing-full-app-patterns` contains notes on Peter Royal's *Building Modern Business Applications* and adaptations to an older platform; `mori://shinzui/keiro-runtime-patterns` owns runtime implementation standards; `mori://shinzui/keiro` and Mori-discovered supporting projects own actual APIs. Do not copy the notes' Message DB snippets into Keiro guidance. Use canonical Mori URIs for every durable external reference. If a source file lacks an artifact handle, cite its project URI together with its project-relative path and state that artifact-level coverage is pending.
+Source authority is layered: `mori://shinzui/event-sourcing-full-app-patterns` contains notes on Peter Royal's *Building Modern Business Applications* and adaptations to an older platform; `mori://shinzui/keiro-runtime-patterns` owns runtime implementation standards; `mori://shinzui/keiro` and Mori-discovered supporting projects own actual APIs. Ground event-store guidance in Kiroku and verify illustrative source snippets against current Keiro APIs. Use canonical Mori URIs for every durable external reference. If a source file lacks an artifact handle, cite its project URI together with its project-relative path and state that artifact-level coverage is pending.
 
 No local ADR existed at planning time. Consult `mori://shinzui/keiro-runtime-patterns/okf/adrs/concepts/ADR-6`, which assigns one normative documentation owner, and `mori://shinzui/keiro-runtime-patterns/okf/adrs/concepts/ADR-8`, which isolates the catalog from plans and consumes a shared profile. Content involving transport also follows `mori://shinzui/keiro-runtime-patterns/okf/adrs/concepts/ADR-3`, distinguishing jobs, private event consumption, and cross-context facts. Read local ADRs created by bootstrap before implementation and carry their applicable decisions forward.
 
@@ -70,7 +75,7 @@ Prove this interface before expanding workflow variants: trace accepted activati
 
 Create `business-patterns/workflows/time-and-automation.md` and `business-patterns/workflows/effects-and-integration.md`. Explain capturing decision inputs, effective time versus processing time, scheduled commands, cross-aggregate automation, and separating replayable materialization from irreversible effects. Link to existing runtime workflow, process-manager, inbox/outbox, and transport standards for mechanics. The added value is choosing a composition for a business use case and explaining partial failure, compensation where appropriate, and user-visible status.
 
-Compare the source notes' private Message DB store and Kafka assumptions with source-verified Kiroku/Keiro choices. Preserve bounded-context ownership. Do not turn the book's PostgreSQL simplicity argument into a claim that every currently required integration path is available on PGMQ. Classify genuine unsupported paths as gaps, with supported alternatives. Cover late/duplicate deliveries, delayed scheduling, external timeout after success, and replay without reissuing an irreversible effect.
+Document private Kiroku event storage and compare the source notes' integration assumptions with source-verified Keiro choices. Preserve bounded-context ownership. Do not turn the book's PostgreSQL simplicity argument into a claim that every currently required integration path is available on PGMQ. Classify genuine unsupported paths as gaps, with supported alternatives. Cover late/duplicate deliveries, delayed scheduling, external timeout after success, and replay without reissuing an irreversible effect.
 
 Update only this child's assigned source-map rows, DocRefs, navigation, logs, and indexes. Prefer a single useful composition document over a set of duplicated runtime mini-guides. Record a local ADR only when a durable application decision warrants one, using the convention bootstrap established.
 
@@ -110,3 +115,5 @@ Changes are additive and local. Preserve unrelated work, existing stable documen
 ## Interfaces and Dependencies
 
 Hard dependency is all of `docs/plans/1-bootstrap-the-okf-catalog-and-book-to-runtime-coverage-map.md`. This child owns `business-patterns/commands/outcomes-and-visibility.md`; M1 acceptance is the hard prerequisite for M2 in `docs/plans/3-document-read-side-application-patterns-and-verify-the-complete-flow.md`. Publish the contract with its evidence before calling M1 accepted. Any later contract change must update the consuming read-side example in the same coordinated change. Shared catalog files retain bootstrap ownership and conventions. Distill durable application decisions into local ADRs and record provenance with the provided scripts at handoff/completion.
+
+Revision 2026-10-07: Apply the user’s terminology constraint throughout the catalog and supporting documentation: Kiroku is Keiro’s event store; omit deprecated storage references. Implementation scope and acceptance remain unchanged.

@@ -16,6 +16,11 @@ provenance:
       at: 2026-10-07T16:16:03Z
       mode: "implement"
       note: "Implement catalog bootstrap and coordinate application guidance acceptance"
+    - model: "gpt-6-astra"
+      harness: "codex-cli"
+      at: 2026-10-07T16:42:12Z
+      mode: "update"
+      note: "Apply Kiroku-only event-store terminology requested by the user"
 ---
 
 # Bootstrap a book-aligned Keiro business application pattern catalog
@@ -30,7 +35,7 @@ The catalog supplements `mori://shinzui/keiro-runtime-patterns`. That repository
 
 Included are adoption of the shared OKF pattern profile, Mori registration, authoring and validation conventions, a complete source coverage map, focused command/workflow and read-side patterns, and a reproducible scenario walkthrough. Excluded are runtime library changes, a second runtime standards library, a production application, a new frontend framework, deployments, and a bespoke shared OKF profile. Minimal example code is appropriate only where needed to substantiate an application contract; illustrative code must be labeled.
 
-The supplied source is `mori://shinzui/event-sourcing-full-app-patterns`, whose registered checkout contains chapter notes, platform adaptations, additional frontend guidance, and the book PDF. Do not attribute Message DB, Kafka, Relay, or a note author's recommendation automatically to the book. Record chapter evidence separately from those adaptations. At plan creation the inspected repository appeared to be a scaffold: `.seihou/config.dhall`, installed planning skills, and Git configuration; no catalog, validation script, or local ADR corpus was present; implementation subsequently found and preserved the existing Mori manifest and stable identity. Its remote and Seihou name are `keiro-runtime-business-application-patterns`; use intended project identity `mori://shinzui/keiro-runtime-business-application-patterns`, verifying registration during bootstrap rather than deriving identity from the misspelled checkout directory.
+The supplied source is `mori://shinzui/event-sourcing-full-app-patterns`, whose registered checkout contains chapter notes, platform adaptations, additional frontend guidance, and the book PDF. Do not attribute platform-specific storage, transport, frontend choices, or a note author's recommendation automatically to the book. Keiro's event store is Kiroku. Record chapter evidence separately from those adaptations. At plan creation the inspected repository appeared to be a scaffold: `.seihou/config.dhall`, installed planning skills, and Git configuration; no catalog, validation script, or local ADR corpus was present; implementation subsequently found and preserved the existing Mori manifest and stable identity. Its remote and Seihou name are `keiro-runtime-business-application-patterns`; use intended project identity `mori://shinzui/keiro-runtime-business-application-patterns`, verifying registration during bootstrap rather than deriving identity from the misspelled checkout directory.
 
 ## Decomposition Strategy
 
@@ -72,7 +77,7 @@ All three children are Complete as of 2026-10-07. The catalog has 10 concepts an
 
 2026-10-07: Adopt the shared pattern catalog profile through a local descriptor instead of creating a new profile. This preserves existing OKF interoperability and keeps application-specific comparison requirements in an authoring contract and focused validation.
 
-2026-10-07: Treat the book notes, their prior platform translation, and Keiro runtime guidance as three distinct evidence layers. The notes explicitly target Message DB and contain illustrative snippets; copying them would falsely imply current Keiro APIs.
+2026-10-07: Treat the book notes, their prior platform translation, and Keiro runtime guidance as three distinct evidence layers. The notes contain platform-specific illustrative snippets; verify each against current Keiro APIs and Kiroku storage semantics before using it.
 
 2026-10-07: Reuse runtime request-receipt and freshness standards. The inspected runtime command-cycle and read-model documents already cover these mechanisms; this catalog must add application composition and selection guidance, not restate those standards.
 
@@ -81,3 +86,5 @@ All three children are Complete as of 2026-10-07. The catalog has 10 concepts an
 Delivered a shared-profile OKF catalog with stable Mori discovery, generated navigation, strict checks and CI wiring, seven application patterns, a 22-source ownership map, and a complete activation walkthrough. The existing runtime library remains the normative mechanics owner. Direct command processing and the conditional snapshot-stream alternative are explicitly distinguished from source-note topology choices; durable-browser-stream gaps retain supported query/reconciliation fallbacks.
 
 Acceptance and limits are recorded in [flow evidence](../validation/business-application-flow.md). Local ADRs [1](../adr/0001-supplement-runtime-patterns-with-book-aligned-application-contracts.md), [2](../adr/0002-separate-command-disposition-from-read-visibility.md), and [3](../adr/0003-reconcile-live-screens-through-authorized-read-contracts.md) preserve ownership, outcome/visibility separation, and screen reconciliation. The result is documentation and a finite ordering model, not a production application or certification of unbuilt API glue.
+
+Revision 2026-10-07: Apply the user’s terminology constraint throughout the catalog and supporting documentation: Kiroku is Keiro’s event store; omit deprecated storage references. Implementation scope and acceptance remain unchanged.

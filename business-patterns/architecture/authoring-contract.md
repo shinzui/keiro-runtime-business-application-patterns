@@ -4,7 +4,7 @@ title: "Authoring supplemental patterns"
 description: "Keep one owner for runtime mechanics and make application choices and evidence explicit."
 generated:
   by: process:codex
-  at: "2026-10-07T16:20:00Z"
+  at: "2026-10-07T16:42:00Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/architecture-authoring-contract
 tags: [business-applications, keiro, composition]
 status: current
@@ -21,7 +21,7 @@ The [runtime ownership decision](mori://shinzui/keiro-runtime-patterns/okf/adrs/
 
 Distinguish four relationships. **Inherits** selects the existing owner and has no local replacement. **Supplements** adds an application contract or composition. **Diverges** selects a scoped alternative to a named baseline and explains why. **Gap** records missing proof or capability and gives a supported fallback. An application-owned implementation obligation is not a claim that Keiro supplies that implementation.
 
-Book claims here mean claims grounded in the chapter notes' Summary or Key Ideas; they are indirect evidence, not direct quotations or independently verified readings of the book PDF. The notes' Applicable Lessons, candidate actions, and additional guides are platform adaptations. Label these separately. Avoid copying the illustrative Message DB APIs in those notes. When a claim requires the original text, verify the book itself before strengthening its attribution.
+Book claims here mean claims grounded in the chapter notes' Summary or Key Ideas; they are indirect evidence, not direct quotations or independently verified readings of the book PDF. The notes' Applicable Lessons, candidate actions, and additional guides are platform adaptations. Label these separately. Use Kiroku for all event-store guidance. Keep this catalog focused on the current runtime and omit references to deprecated event stores. Verify illustrative APIs against current source before using them. When a claim requires the original text, verify the book itself before strengthening its attribution.
 
 ## Pattern shape
 

@@ -4,7 +4,7 @@ title: "Separate activation from its external consequences"
 description: "Keep committed business facts independent from retryable notifications and public integration events."
 generated:
   by: process:codex
-  at: "2026-10-07T16:25:00Z"
+  at: "2026-10-07T16:42:00Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/workflows-effects-and-integration
 tags: [business-applications, keiro, composition]
 status: current
@@ -25,7 +25,7 @@ Activation should not be rolled back because an email provider is down. Converse
 
 ## Book principle and source layer
 
-The [business-rule notes](mori://shinzui/event-sourcing-full-app-patterns/docs/what-is-a-business-rule) separate effects from write invariants and derived views. The [ideal platform guide](mori://shinzui/event-sourcing-full-app-patterns/docs/ideal-platform-architecture) adds private Message DB stores and Kafka as a platform adaptation. The [implementation notes](mori://shinzui/event-sourcing-full-app-patterns/docs/implementation-translation) describe PostgreSQL simplicity; that motivation is not evidence of a current PGMQ integration bus.
+The [business-rule notes](mori://shinzui/event-sourcing-full-app-patterns/docs/what-is-a-business-rule) separate effects from write invariants and derived views. The [ideal platform guide](mori://shinzui/event-sourcing-full-app-patterns/docs/ideal-platform-architecture) supplies a platform-specific topology. Here, private event storage is provided by Kiroku; integration choices follow the current runtime contracts. The [implementation notes](mori://shinzui/event-sourcing-full-app-patterns/docs/implementation-translation) describe PostgreSQL simplicity; that motivation is not evidence of a current PGMQ integration bus.
 
 ## Runtime baseline
 
@@ -43,7 +43,7 @@ For a multi-step business process, publish intermediate status. If activation mu
 
 ## Alternatives and divergences
 
-This inherits runtime delivery mechanics and supplements the source guide with a user-facing consequence policy. Message DB-to-Kiroku is a technology translation. Private facts versus public contracts remains unchanged. Synchronous remote calls can be acceptable for pre-decision enrichment with explicit stale-data/failure policy; they cannot make an external effect and the event append one atomic operation.
+This inherits runtime delivery mechanics and supplements the source guide with a user-facing consequence policy. Kiroku stores private domain facts; public integration contracts remain a separate boundary. Synchronous remote calls can be acceptable for pre-decision enrichment with explicit stale-data/failure policy; they cannot make an external effect and the event append one atomic operation.
 
 ## Failure and recovery
 

@@ -4,7 +4,7 @@ title: "Follow a chapter activation from intent to screen"
 description: "Walk one business action through command disposition, scoped visibility, and live-screen recovery."
 generated:
   by: process:codex
-  at: "2026-10-07T16:25:00Z"
+  at: "2026-10-07T16:42:00Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/examples-chapter-activation
 tags: [business-applications, keiro, composition]
 status: current
@@ -27,7 +27,7 @@ Use this worked example to design and review one business feature across API, co
 
 ## Book principle and source layer
 
-The [high-level flow notes](mori://shinzui/event-sourcing-full-app-patterns/docs/high-level-data-flow) connect mutation, pure command processing, events, materialization, and observation. The [testing notes](mori://shinzui/event-sourcing-full-app-patterns/docs/testing-monitoring-observability) require composed workflow checks in addition to component tests. This example translates that loop to the source-verified runtime boundaries and the local application contracts, rather than copying old Message DB snippets.
+The [high-level flow notes](mori://shinzui/event-sourcing-full-app-patterns/docs/high-level-data-flow) connect mutation, pure command processing, events, materialization, and observation. The [testing notes](mori://shinzui/event-sourcing-full-app-patterns/docs/testing-monitoring-observability) require composed workflow checks in addition to component tests. This example traces that conceptual loop through source-verified Keiro boundaries, Kiroku event storage, and the local application contracts.
 
 ## Runtime baseline
 

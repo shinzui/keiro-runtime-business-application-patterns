@@ -13,6 +13,8 @@ Keep application composition in the isolated `business-patterns/` OKF bundle and
 
 Every source has an explicit inherited, supplemental, divergent, or gap disposition. Book summaries, platform adaptations, runtime guarantees, and application-owned obligations remain distinguishable. A divergence names its baseline, condition, costs, and preserved guarantees. Unsupported capability claims get truthful fallbacks. Narrative guidance does not imply conformance certification or require PAT handles.
 
+The catalog targets Kiroku as Keiro’s event store. Source adaptations must be interpreted through the current runtime; deprecated event-store names and migration comparisons are excluded from this repository’s guidance.
+
 ## Consequences
 
 Mechanical checks validate structure and links; manual review verifies incremental value and accuracy. Existing runtime recommendations remain authoritative unless a document explicitly scopes an application alternative. No runtime source changes, product website, or new frontend stack are implied.

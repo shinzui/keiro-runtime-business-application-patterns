@@ -4,7 +4,7 @@ title: "Read a business view with scoped freshness"
 description: "Choose what a screen can truthfully claim after a command or projection rebuild."
 generated:
   by: process:codex
-  at: "2026-10-07T16:25:00Z"
+  at: "2026-10-07T16:42:00Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/reads-materialization-and-freshness
 tags: [business-applications, keiro, composition]
 status: current
@@ -25,7 +25,7 @@ The activation mutation returns accepted, yet the detail screen still shows inac
 
 ## Book principle and source layer
 
-The [materializer notes](mori://shinzui/event-sourcing-full-app-patterns/docs/event-materializer) recommend views shaped for user workflows, checkpointed updates, and separation from irreversible effects. The [expansion notes](mori://shinzui/event-sourcing-full-app-patterns/docs/expansion-points-and-beyond) discuss parallel materialization and more complicated checkpoints. Their illustrative `visibleAsOf` and Message DB handlers are adaptations; they do not establish a universal freshness scalar.
+The [materializer notes](mori://shinzui/event-sourcing-full-app-patterns/docs/event-materializer) recommend views shaped for user workflows, checkpointed updates, and separation from irreversible effects. The [expansion notes](mori://shinzui/event-sourcing-full-app-patterns/docs/expansion-points-and-beyond) discuss parallel materialization and more complicated checkpoints. Their illustrative `visibleAsOf` handlers are adaptations; for Kiroku-backed views, use the runtime's scoped freshness contract.
 
 ## Runtime baseline
 

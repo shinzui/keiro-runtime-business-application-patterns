@@ -17,6 +17,11 @@ provenance:
       at: 2026-10-07T16:28:17Z
       mode: "implement"
       note: "Implement read-side composition and complete-flow validation"
+    - model: "gpt-6-astra"
+      harness: "codex-cli"
+      at: 2026-10-07T16:42:12Z
+      mode: "update"
+      note: "Apply Kiroku-only event-store terminology requested by the user"
 ---
 
 # Document read-side application patterns and verify the complete flow
@@ -44,7 +49,7 @@ Completed 2026-10-07. Two read-side patterns and the complete chapter activation
 
 This repository starts as a scaffold with installed planning skills and `.seihou/config.dhall`; no application code or catalog existed when this plan was written. Open Knowledge Format (OKF) stores Markdown concepts with validated metadata, generated indexes, and update logs. A profile is the reusable validation contract, not a new runtime capability. Mori resolves canonical project and document identities to local source paths. Run commands from this repository root, obtained with `git rev-parse --show-toplevel`.
 
-Source authority is layered: `mori://shinzui/event-sourcing-full-app-patterns` contains notes on Peter Royal's *Building Modern Business Applications* and adaptations to an older platform; `mori://shinzui/keiro-runtime-patterns` owns runtime implementation standards; `mori://shinzui/keiro` and Mori-discovered supporting projects own actual APIs. Do not copy the notes' Message DB snippets into Keiro guidance. Use canonical Mori URIs for every durable external reference. If a source file lacks an artifact handle, cite its project URI together with its project-relative path and state that artifact-level coverage is pending.
+Source authority is layered: `mori://shinzui/event-sourcing-full-app-patterns` contains notes on Peter Royal's *Building Modern Business Applications* and adaptations to an older platform; `mori://shinzui/keiro-runtime-patterns` owns runtime implementation standards; `mori://shinzui/keiro` and Mori-discovered supporting projects own actual APIs. Ground event-store guidance in Kiroku and verify illustrative source snippets against current Keiro APIs. Use canonical Mori URIs for every durable external reference. If a source file lacks an artifact handle, cite its project URI together with its project-relative path and state that artifact-level coverage is pending.
 
 No local ADR existed at planning time. Consult `mori://shinzui/keiro-runtime-patterns/okf/adrs/concepts/ADR-6`, which assigns one normative documentation owner, and `mori://shinzui/keiro-runtime-patterns/okf/adrs/concepts/ADR-8`, which isolates the catalog from plans and consumes a shared profile. Content involving transport also follows `mori://shinzui/keiro-runtime-patterns/okf/adrs/concepts/ADR-3`, distinguishing jobs, private event consumption, and cross-context facts. Read local ADRs created by bootstrap before implementation and carry their applicable decisions forward.
 
@@ -111,3 +116,5 @@ Changes are additive and local. Preserve unrelated work, existing stable documen
 ## Interfaces and Dependencies
 
 The whole-child prerequisite is `docs/plans/1-bootstrap-the-okf-catalog-and-book-to-runtime-coverage-map.md`; M2 also requires M1 of `docs/plans/2-document-business-command-and-workflow-composition-patterns.md`. This plan owns the read-side guidance, complete example, final coverage closure, and integration evidence. EP-2 retains ownership of the command outcome contract. Bootstrap retains ownership of profile/checker/source-map structure; extend content and registrations without changing that contract incidentally. Preserve the shared intention and record plan revisions through the skill scripts. Final ADR distillation covers all child Decision Logs, discoveries, and outcomes, leaving task-local evidence in the plans.
+
+Revision 2026-10-07: Apply the user’s terminology constraint throughout the catalog and supporting documentation: Kiroku is Keiro’s event store; omit deprecated storage references. Implementation scope and acceptance remain unchanged.

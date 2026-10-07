@@ -24,7 +24,7 @@ The [walkthrough](../../business-patterns/examples/chapter-activation.md) adds t
 
 ## Source coverage and non-duplication review
 
-The source map covers all 22 registered inputs. Inherited rows retain their existing owners. Command-log topology has a named direct-processing alternative; Message DB-to-Kiroku is treated as translation. The two subscription implementation guides have documented gaps for a durable browser service and use query/invalidation or polling as the supported design fallback. The query-first recommendation is distinguished from the book's live-query option.
+The source map covers all 22 registered inputs. Inherited rows retain their existing owners. Command-log topology has a named direct-processing alternative; all event-store guidance targets Kiroku. The two subscription implementation guides have documented gaps for a durable browser service and use query/invalidation or polling as the supported design fallback. The query-first recommendation is distinguished from the book's live-query option.
 
 The four command/workflow patterns' added value is recorded in [command evidence](command-composition.md). `materialization-and-freshness` adds screen-level selection and scoped observation, not a new projection runner. `query-and-live-updates` adds an attachment/reconciliation and authorization boundary, not a second server-side subscription standard. `chapter-activation` integrates those decisions and failure states, without copying runtime setup recipes. Profile, indexes, and source navigation remain owned by the bootstrap contract.
 
