@@ -36,6 +36,15 @@ in  Schema.Project::{
         , description = Some
             "Book-aligned application compositions supplementing the Keiro runtime catalog"
         }
+      , Schema.OkfBundle::{
+        , name = "book-notes"
+        , path = "book-notes"
+        , profileBinding = Some
+            (Schema.ProfileBinding.Local "okf/book-notes.dhall")
+        , okfVersion = "0.2"
+        , description = Some
+            "Book-checked explanations and explicitly scoped application adaptations"
+        }
       ]
     , docs =
       [ Schema.DocRef::{
@@ -116,6 +125,128 @@ in  Schema.Project::{
         , location =
             Schema.DocLocation.LocalFile
               "business-patterns/architecture/source-map.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-what-is-a-business-application"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "book-notes/what-is-a-business-application.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-the-status-quo"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location = Schema.DocLocation.LocalFile "book-notes/the-status-quo.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-what-is-a-reactive-system"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "book-notes/what-is-a-reactive-system.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-why-reactive-business-applications"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "book-notes/why-reactive-business-applications.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-what-is-a-business-rule"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile "book-notes/what-is-a-business-rule.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-managing-time"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location = Schema.DocLocation.LocalFile "book-notes/managing-time.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-constraints-and-principles"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "book-notes/constraints-and-principles.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-high-level-data-flow"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile "book-notes/high-level-data-flow.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-command-processor"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile "book-notes/command-processor.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-command-generator"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile "book-notes/command-generator.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-event-materializer"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile "book-notes/event-materializer.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-testing-monitoring-observability"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "book-notes/testing-monitoring-observability.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-required-technologies"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile "book-notes/required-technologies.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-implementation-translation"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "book-notes/implementation-translation.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-expansion-points-and-beyond"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location =
+            Schema.DocLocation.LocalFile
+              "book-notes/expansion-points-and-beyond.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-adaptations"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location = Schema.DocLocation.LocalFile "book-notes/adaptations.md"
+        }
+      , Schema.DocRef::{
+        , key = "book-validation"
+        , kind = Schema.DocKind.Guide
+        , audience = Schema.DocAudience.Module
+        , location = Schema.DocLocation.LocalFile "book-notes/validation.md"
         }
       ]
     , dependencyRefs =
