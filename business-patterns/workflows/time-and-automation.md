@@ -4,7 +4,7 @@ title: "Model business time and delayed automation"
 description: "Keep business effective time, captured decision inputs, and delayed execution distinct."
 generated:
   by: process:codex
-  at: "2026-10-07T16:25:00Z"
+  at: "2026-10-07T17:27:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/workflows-time-and-automation
 tags: [business-applications, keiro, composition]
 status: current
@@ -12,8 +12,8 @@ relationship: supplements
 runtime_baseline: mori://shinzui/keiro-runtime-patterns/docs/keiro-durable-workflows
 sources:
   - resource: mori://shinzui/keiro-runtime-patterns/docs/keiro-durable-workflows
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/managing-time
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/what-is-a-business-rule
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-managing-time
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-what-is-a-business-rule
 ---
 
 # Model business time and delayed automation
@@ -24,7 +24,7 @@ A chapter is scheduled to activate tomorrow, but the worker runs late or configu
 
 ## Book principle and source layer
 
-The [time notes](mori://shinzui/event-sourcing-full-app-patterns/docs/managing-time) distinguish future requests from immutable past facts and discuss historical interpretation. Their adaptation separates effective business date from recorded/corrected time. The choice of Keiro workflow versus local event reaction below is an application translation, not a technology prescribed by the book.
+The [time notes](../../book-notes/managing-time.md) distinguish future requests from immutable past facts and discuss historical interpretation. Chapter 6 itself distinguishes occurrence time from awareness time and discusses rule changes; the local scheduling and correction policies make those distinctions concrete for this application. The choice of Keiro workflow versus local event reaction below is an application translation, not a technology prescribed by the book.
 
 ## Runtime baseline
 

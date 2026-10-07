@@ -22,7 +22,6 @@ in  Schema.Project::{
       ]
     , dependencies =
       [ "shinzui/keiro-runtime-patterns"
-      , "shinzui/event-sourcing-full-app-patterns"
       , "shinzui/okf-profiles"
       , "shinzui/keiro"
       ]

@@ -4,7 +4,7 @@ title: "Generate a complete business command"
 description: "Choose direct or durable command processing while keeping the business decision deterministic."
 generated:
   by: process:codex
-  at: "2026-10-07T16:53:01Z"
+  at: "2026-10-07T17:27:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/commands-generation-and-processing
 tags: [business-applications, keiro, composition]
 status: current
@@ -12,9 +12,9 @@ relationship: diverges
 runtime_baseline: mori://shinzui/keiro-runtime-patterns/docs/keiro-command-cycle-and-errors
 sources:
   - resource: mori://shinzui/keiro-runtime-patterns/docs/keiro-command-cycle-and-errors
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/what-is-a-business-rule
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/command-generator
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/command-processor
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-what-is-a-business-rule
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-command-generator
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-command-processor
 ---
 
 # Generate a complete business command
@@ -25,7 +25,7 @@ A user clicks “Activate chapter.” The action spans authentication, input par
 
 ## Book principle and source layer
 
-The chapter notes on [business rules](mori://shinzui/event-sourcing-full-app-patterns/docs/what-is-a-business-rule) place invariants on the write side, derived state in materializers, and effects after durable facts. The [command generator](mori://shinzui/event-sourcing-full-app-patterns/docs/command-generator) supplies a complete input to a pure processor. The [processor notes](mori://shinzui/event-sourcing-full-app-patterns/docs/command-processor) describe a durable command log and initially serial processing. Those are indirect chapter evidence. Their illustrative code is the note author's platform translation; this catalog grounds command processing in Keiro and event storage in Kiroku.
+The chapter notes on [business rules](../../book-notes/what-is-a-business-rule.md) place invariants on the write side, derived state in materializers, and effects after durable facts. The [command generator](../../book-notes/command-generator.md) supplies a complete input to a pure processor. The [processor notes](../../book-notes/command-processor.md) describe a durable command log and initially serial processing. These local explanations cite checked book passages. The book also validates prospective events through its applicator before append (chapter 9, p. 88); it does not describe the exact placement of Keiro decider logic. This catalog grounds command processing in Keiro and event storage in Kiroku.
 
 ## Runtime baseline
 

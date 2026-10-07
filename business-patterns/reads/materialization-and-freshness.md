@@ -4,7 +4,7 @@ title: "Read a business view with scoped freshness"
 description: "Choose what a screen can truthfully claim after a command or projection rebuild."
 generated:
   by: process:codex
-  at: "2026-10-07T16:53:01Z"
+  at: "2026-10-07T17:27:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/reads-materialization-and-freshness
 tags: [business-applications, keiro, composition]
 status: current
@@ -12,9 +12,9 @@ relationship: supplements
 runtime_baseline: mori://shinzui/keiro-runtime-patterns/docs/keiro-read-models-and-projections
 sources:
   - resource: mori://shinzui/keiro-runtime-patterns/docs/keiro-read-models-and-projections
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/event-materializer
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/expansion-points-and-beyond
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/high-level-data-flow
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-event-materializer
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-expansion-points-and-beyond
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-high-level-data-flow
 ---
 
 # Read a business view with scoped freshness
@@ -25,7 +25,7 @@ The activation mutation returns accepted, yet the detail screen still shows inac
 
 ## Book principle and source layer
 
-The [materializer notes](mori://shinzui/event-sourcing-full-app-patterns/docs/event-materializer) recommend views shaped for user workflows, checkpointed updates, and separation from irreversible effects. The [expansion notes](mori://shinzui/event-sourcing-full-app-patterns/docs/expansion-points-and-beyond) discuss parallel materialization and more complicated checkpoints. Their illustrative `visibleAsOf` handlers are adaptations; for Kiroku-backed views, use the runtime's scoped freshness contract.
+The [materializer notes](../../book-notes/event-materializer.md) recommend views shaped for user workflows, checkpointed updates, and separation from irreversible effects. The [expansion notes](../../book-notes/expansion-points-and-beyond.md) discuss parallel materialization and more complicated checkpoints. The book explicitly considers source identity alongside a visibility revision (chapter 15, pp. 169–170). For Kiroku-backed views, use the runtime’s scoped freshness contract.
 
 ## Runtime baseline
 
@@ -62,7 +62,7 @@ During rebuild, inherit the registered catalog lifecycle. Offline reconstruction
 
 ## Alternatives and divergences
 
-This supplements the book and runtime; it does not replace their projection implementation. Inline application is useful for a small view that must commit with the write, but couples the write to that view's availability and work. Async application permits independent progress with an explicit lag state. The choice is a business latency/availability decision, not a claim that one mode is always correct. Separate immediate reads from guarantees about a specific write; the word “strong” alone is insufficient.
+The async recommendation supplements the book and runtime. The book cautions against coupling command processing to materialization (chapter 11, p. 115). Selecting inline application is therefore an explicit availability tradeoff from that baseline. Inline application is useful for a small view that must commit with the write, but couples the write to that view's availability and work. Async application permits independent progress with an explicit lag state. The choice is a business latency/availability decision, not a claim that one mode is always correct. Separate immediate reads from guarantees about a specific write; the word “strong” alone is insufficient.
 
 ## Failure and recovery
 

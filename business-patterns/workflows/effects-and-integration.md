@@ -4,7 +4,7 @@ title: "Separate activation from its external consequences"
 description: "Keep committed business facts independent from retryable notifications and public integration events."
 generated:
   by: process:codex
-  at: "2026-10-07T16:53:01Z"
+  at: "2026-10-07T17:27:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/workflows-effects-and-integration
 tags: [business-applications, keiro, composition]
 status: current
@@ -12,9 +12,9 @@ relationship: supplements
 runtime_baseline: mori://shinzui/keiro-runtime-patterns/docs/messaging-outbox
 sources:
   - resource: mori://shinzui/keiro-runtime-patterns/docs/messaging-outbox
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/ideal-platform-architecture
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/what-is-a-business-rule
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/implementation-translation
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-adaptations#ideal-platform-architecture
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-what-is-a-business-rule
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-implementation-translation
 ---
 
 # Separate activation from its external consequences
@@ -25,7 +25,7 @@ Activation should not be rolled back because an email provider is down. Converse
 
 ## Book principle and source layer
 
-The [business-rule notes](mori://shinzui/event-sourcing-full-app-patterns/docs/what-is-a-business-rule) separate effects from write invariants and derived views. The [ideal platform guide](mori://shinzui/event-sourcing-full-app-patterns/docs/ideal-platform-architecture) supplies a platform-specific topology. Here, private event storage is provided by Kiroku; integration choices follow the current runtime contracts. The [implementation notes](mori://shinzui/event-sourcing-full-app-patterns/docs/implementation-translation) describe PostgreSQL simplicity; that motivation is not evidence of a current PGMQ integration bus.
+The [business-rule notes](../../book-notes/what-is-a-business-rule.md) separate effects from write invariants and derived views. The [ideal platform guide](../../book-notes/adaptations.md#ideal-platform-architecture) supplies a platform-specific topology. Here, private event storage is provided by Kiroku; integration choices follow the current runtime contracts. The [implementation notes](../../book-notes/implementation-translation.md) describe PostgreSQL simplicity; that motivation is not evidence of a current PGMQ integration bus.
 
 ## Runtime baseline
 

@@ -4,7 +4,7 @@ title: "Follow a chapter activation from intent to screen"
 description: "Walk one business action through command disposition, scoped visibility, and live-screen recovery."
 generated:
   by: process:codex
-  at: "2026-10-07T16:42:00Z"
+  at: "2026-10-07T17:27:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/examples-chapter-activation
 tags: [business-applications, keiro, composition]
 status: current
@@ -12,11 +12,11 @@ relationship: supplements
 runtime_baseline: mori://shinzui/keiro-runtime-patterns/docs/keiro-command-cycle-and-errors
 sources:
   - resource: mori://shinzui/keiro-runtime-patterns/docs/keiro-command-cycle-and-errors
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/high-level-data-flow
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/testing-monitoring-observability
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/command-generator
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/command-processor
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/event-materializer
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-high-level-data-flow
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-testing-monitoring-observability
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-command-generator
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-command-processor
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-event-materializer
 ---
 
 # Follow a chapter activation from intent to screen
@@ -27,7 +27,7 @@ Use this worked example to design and review one business feature across API, co
 
 ## Book principle and source layer
 
-The [high-level flow notes](mori://shinzui/event-sourcing-full-app-patterns/docs/high-level-data-flow) connect mutation, pure command processing, events, materialization, and observation. The [testing notes](mori://shinzui/event-sourcing-full-app-patterns/docs/testing-monitoring-observability) require composed workflow checks in addition to component tests. This example traces that conceptual loop through source-verified Keiro boundaries, Kiroku event storage, and the local application contracts.
+The [high-level flow notes](../../book-notes/high-level-data-flow.md) connect mutation, pure command processing, events, materialization, and observation. The [testing notes](../../book-notes/testing-monitoring-observability.md) require composed workflow checks in addition to component tests. This example traces that conceptual loop through source-verified Keiro boundaries, Kiroku event storage, and the local application contracts.
 
 ## Runtime baseline
 

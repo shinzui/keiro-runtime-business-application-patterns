@@ -4,7 +4,7 @@ title: "Separate command disposition from read visibility"
 description: "Expose a truthful operation result without confusing a committed write with a fresh screen."
 generated:
   by: process:codex
-  at: "2026-10-07T16:53:01Z"
+  at: "2026-10-07T17:27:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/commands-outcomes-and-visibility
 tags: [business-applications, keiro, composition]
 status: current
@@ -12,8 +12,8 @@ relationship: supplements
 runtime_baseline: mori://shinzui/keiro-runtime-patterns/docs/keiro-command-cycle-and-errors
 sources:
   - resource: mori://shinzui/keiro-runtime-patterns/docs/keiro-command-cycle-and-errors
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/command-generator
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/constraints-and-principles
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-command-generator
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-constraints-and-principles
 ---
 
 # Separate command disposition from read visibility
@@ -24,7 +24,7 @@ A mutation can commit while its response is lost, or return successfully before 
 
 ## Book principle and source layer
 
-The [generator notes](mori://shinzui/event-sourcing-full-app-patterns/docs/command-generator) describe request identities, typed failures, and a revision/position for observing results. [Constraints and principles](mori://shinzui/event-sourcing-full-app-patterns/docs/constraints-and-principles) motivates semantic mutations and real-time support. Their `visibleAsOf` illustrations must be translated into a scoped runtime position; they do not establish a global position across independent services.
+The [generator notes](../../book-notes/command-generator.md) describe request identities, typed failures, and a revision/position for observing results. [Constraints and principles](../../book-notes/constraints-and-principles.md) motivates semantic mutations and real-time support. The book’s final-event visibility revision must be translated into a scoped runtime position; they do not establish a global position across independent services.
 
 ## Runtime baseline
 

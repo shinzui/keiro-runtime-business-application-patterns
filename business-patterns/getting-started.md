@@ -4,20 +4,20 @@ title: Business applications with Keiro
 description: Choose book-aligned application compositions that supplement the Keiro runtime standards.
 generated:
   by: process:codex
-  at: "2026-10-07T16:42:00Z"
+  at: "2026-10-07T17:27:01Z"
 resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/getting-started
 tags: [business-applications, keiro, navigation]
 status: current
 sources:
   - resource: mori://shinzui/keiro-runtime-patterns/okf/adrs/concepts/ADR-6
-  - resource: mori://shinzui/event-sourcing-full-app-patterns/docs/high-level-data-flow
+  - resource: mori://shinzui/keiro-runtime-business-application-patterns/docs/book-high-level-data-flow
 ---
 
 # Business applications with Keiro
 
-Start with the business action and what a user must observe. This catalog connects the chapter notes on Peter Royal's *Building Modern Business Applications* to application contracts over Keiro.
+Start with the business action and what a user must observe. This catalog connects book-checked explanations of Peter Royal's *Building Modern Business Applications* to application contracts over Keiro.
 
-The [runtime library](mori://shinzui/keiro-runtime-patterns) owns runtime mechanics. This catalog owns interpretation, composition, and explicitly scoped alternatives. Keiro uses Kiroku as its event store. The [source notes](mori://shinzui/event-sourcing-full-app-patterns) contain platform-specific adaptations that must be distinguished from the book's principles and checked against the current runtime.
+The [runtime library](mori://shinzui/keiro-runtime-patterns) owns runtime mechanics. This catalog owns interpretation, composition, and explicitly scoped alternatives. Keiro uses Kiroku as its event store. The local [book notes](../book-notes/index.md) provide the supporting explanations. Their [validation record](../book-notes/validation.md) distinguishes checked book claims from application adaptations and records corrections.
 
 ## Choose a route
 
@@ -35,4 +35,4 @@ The [runtime library](mori://shinzui/keiro-runtime-patterns) owns runtime mechan
 
 ## Read evidence honestly
 
-The book is represented through the supplied chapter notes, whose platform adaptations are identified separately. Patterns are source-backed application designs, not a shipped GraphQL service or a general request-receipt library. Each pattern cites its runtime owner, states its additional decision, and names failure/recovery behavior. A validated document is not a certified application. The walkthrough gives adoption acceptance scenarios; the small executable model checks only screen ordering assumptions.
+The book is represented through locally maintained explanations checked against its cited passages; platform adaptations are identified separately. Patterns are source-backed application designs, not a shipped GraphQL service or a general request-receipt library. Each pattern cites its runtime owner, states its additional decision, and names failure/recovery behavior. A validated document is not a certified application. The walkthrough gives adoption acceptance scenarios; the small executable model checks only screen ordering assumptions.

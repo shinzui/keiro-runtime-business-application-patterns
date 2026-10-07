@@ -2,6 +2,8 @@
 
 Application guidance for Peter Royal's *Building Modern Business Applications*, using the Keiro runtime. This catalog supplements [mori://shinzui/keiro-runtime-patterns](mori://shinzui/keiro-runtime-patterns); each local pattern explains what it adds and when it diverges.
 
+The supporting [book notes](book-notes/index.md) are maintained here, with a [book validation record](book-notes/validation.md) and clearly labeled [application adaptations](book-notes/adaptations.md). Reading the patterns no longer requires the original notes repository.
+
 Start with [getting started](business-patterns/getting-started.md), the [source map](business-patterns/architecture/source-map.md), and the [authoring contract](business-patterns/architecture/authoring-contract.md). [MasterPlan](docs/masterplans/1-bootstrap-a-book-aligned-keiro-business-application-pattern-catalog.md) tracks implementation.
 
 ## Validate and discover
@@ -19,4 +21,4 @@ mori register --local
 mori path mori://shinzui/keiro-runtime-business-application-patterns/docs/getting-started
 ```
 
-Checks use a temporary directory and do not rewrite the working tree. To refresh indexes intentionally, run `okf index business-patterns --write --okf-version 0.2`. Record material changes with `okf log add` as described in the authoring contract. No runtime or server needs to run for documentation checks.
+Checks use a temporary directory and do not rewrite the working tree. To refresh indexes intentionally, run `okf index business-patterns --write --okf-version 0.2` and `okf index book-notes --write --okf-version 0.2`. Record material changes with `okf log add` as described in the authoring contract. No runtime or server needs to run for documentation checks.

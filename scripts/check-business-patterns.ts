@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 
 const root = process.cwd();
 const bundle = 'business-patterns';
+const bundles = [bundle, 'book-notes'];
 const prefix = 'mori://shinzui/keiro-runtime-business-application-patterns/docs/';
 const args = process.argv.slice(2);
 const complete = args.includes('--complete');
@@ -31,15 +32,19 @@ function meta(path: string): any {
   requireThat(m, `Missing frontmatter: ${path}`);
   return Bun.YAML.parse(m[1]);
 }
-run(['dhall','freeze','--check','okf/business-patterns.dhall']);
 run(['dhall','freeze','--check','mori.dhall']);
-run(['dhall','type','--file','okf/business-patterns.dhall']);
 const manifest = JSON.parse(run(['dhall-to-json','--file','mori.dhall']));
-const binding = manifest.okfBundles.find((b:any) => b.name === bundle);
-requireThat(binding?.path === bundle && binding.okfVersion === '0.2', 'Incorrect bundle manifest');
-requireThat(binding.profileBinding === 'okf/business-patterns.dhall' || binding.profile === 'okf/business-patterns.dhall', 'Incorrect profile binding');
-const validation = run(['okf','validate',bundle,'--strict','--profile','okf/business-patterns.dhall','--profile-enforce','--log-enforce']);
-const all = files(bundle).filter(p=>p.endsWith('.md'));
+const validations: string[] = [];
+for (const name of bundles) {
+  const profile = `okf/${name}.dhall`;
+  run(['dhall','freeze','--check',profile]);
+  run(['dhall','type','--file',profile]);
+  const binding = manifest.okfBundles.find((b:any) => b.name === name);
+  requireThat(binding?.path === name && binding.okfVersion === '0.2', `Incorrect bundle manifest: ${name}`);
+  requireThat(binding.profileBinding === profile || binding.profile === profile, `Incorrect profile binding: ${name}`);
+  validations.push(run(['okf','validate',name,'--strict','--profile',profile,'--profile-enforce','--log-enforce']));
+}
+const all = bundles.flatMap(b=>files(b).filter(p=>p.endsWith('.md'))).sort();
 const concepts = all.filter(p=>!['index.md','log.md'].includes(p.split('/').at(-1)!));
 const resources = new Set<string>();
 for (const p of concepts) {
@@ -56,8 +61,23 @@ for (const p of concepts) {
     requireThat(m.runtime_baseline?.startsWith('mori://shinzui/keiro-runtime-patterns/'), `Missing runtime baseline: ${p}`);
   }
 }
-for (const d of manifest.docs) if (d.location?.startsWith(bundle+'/'))
+for (const d of manifest.docs) if (bundles.some(b=>d.location?.startsWith(b+'/')))
   requireThat(resources.has(prefix+d.key), `DocRef has no concept: ${d.key}`);
+function localSource(resource: string, context: string) {
+  const [uri, anchor] = resource.split('#');
+  requireThat(resources.has(uri), `Missing local source: ${context}: ${resource}`);
+  if (anchor) {
+    const doc = manifest.docs.find((d:any)=>prefix+d.key === uri);
+    const headings = [...read(doc.location).matchAll(/^#+\s+(.+)$/gm)].map(m=>m[1].toLowerCase().replace(/[^\p{L}\p{N}_\-\s]/gu,'').trim().replace(/\s/g,'-'));
+    requireThat(headings.includes(anchor), `Missing local source anchor: ${context}: ${resource}`);
+  }
+}
+for (const p of concepts) {
+  for (const source of meta(p).sources ?? []) {
+    if (source.resource?.startsWith(prefix)) localSource(source.resource, p);
+    requireThat(!source.resource?.startsWith('mori://shinzui/event-sourcing-full-app-patterns'), `External book source dependency: ${p}`);
+  }
+}
 // Inspect links outside fences as well as every generated index. External URI resolution is a separate Mori check.
 for (const p of all) {
   const content = read(p).replace(/^```[^\n]*\n[\s\S]*?^```\s*$/gm,'');
@@ -75,10 +95,11 @@ for (const p of all) {
   }
 }
 const coverage = meta(bundle+'/architecture/source-map.md').coverage;
-requireThat(Array.isArray(coverage) && coverage.length === 22, 'Expected 22 source-map entries');
-requireThat(new Set(coverage.map((c:any)=>c.source)).size === 22, 'Duplicate source-map entry');
+requireThat(Array.isArray(coverage) && coverage.length === 23, 'Expected 23 source-map entries');
+requireThat(new Set(coverage.map((c:any)=>c.source)).size === 23, 'Duplicate source-map entry');
 for (const c of coverage) {
-  requireThat(c.source?.startsWith('mori://shinzui/event-sourcing-full-app-patterns/docs/') && c.runtime?.startsWith('mori://shinzui/keiro-runtime-patterns/docs/'), 'Invalid source/runtime identity');
+  requireThat(c.source?.startsWith(prefix+'book-') && c.runtime?.startsWith('mori://shinzui/keiro-runtime-patterns/docs/'), 'Invalid source/runtime identity');
+  localSource(c.source, 'coverage');
   requireThat(c.layer && c.rationale && ['inherits','supplements','diverges','gap'].includes(c.disposition), `Invalid coverage: ${c.source}`);
   if (c.disposition === 'inherits') requireThat(c.state === 'inherited' && c.destination === null, `Inherited row duplicates guidance: ${c.source}`);
   else {
@@ -88,23 +109,28 @@ for (const c of coverage) {
     if (complete) requireThat(c.state === 'published', `Unfinished coverage: ${c.source}`);
   }
 }
-const graph = JSON.parse(run(['okf','graph',bundle,'--json']));
-const ids = new Set(graph.nodes.map((n:any)=>n.id));
-requireThat(ids.size === concepts.length && graph.nodes.length === concepts.length, 'Graph/concept count mismatch');
-for (const e of graph.edges) requireThat(ids.has(e.source) && ids.has(e.target), 'Dangling graph edge');
+for (const name of bundles) {
+  const graph = JSON.parse(run(['okf','graph',name,'--json']));
+  const ids = new Set(graph.nodes.map((n:any)=>n.id));
+  const count = concepts.filter(p=>p.startsWith(name+'/')).length;
+  requireThat(ids.size === count && graph.nodes.length === count, `Graph/concept count mismatch: ${name}`);
+  for (const e of graph.edges) requireThat(ids.has(e.source) && ids.has(e.target), `Dangling graph edge: ${name}`);
+}
 const temp = mkdtempSync(join(tmpdir(),'business-patterns-index-'));
 try {
-  cpSync(bundle,join(temp,bundle),{recursive:true});
-  run(['okf','index',bundle,'--write','--okf-version','0.2'],temp);
-  const expected = files(join(temp,bundle)).filter(p=>p.endsWith('/index.md')).map(p=>relative(temp,p));
-  const actual = all.filter(p=>p.endsWith('/index.md'));
-  requireThat(JSON.stringify(expected) === JSON.stringify(actual), 'Generated index file set is stale');
-  for (const p of expected) requireThat(read(p) === read(join(temp,p)), `Generated index is stale: ${p}`);
+  for (const name of bundles) {
+    cpSync(name,join(temp,name),{recursive:true});
+    run(['okf','index',name,'--write','--okf-version','0.2'],temp);
+    const expected = files(join(temp,name)).filter(p=>p.endsWith('/index.md')).map(p=>relative(temp,p));
+    const actual = all.filter(p=>p.startsWith(name+'/') && p.endsWith('/index.md'));
+    requireThat(JSON.stringify(expected) === JSON.stringify(actual), `Generated index file set is stale: ${name}`);
+    for (const p of expected) requireThat(read(p) === read(join(temp,p)), `Generated index is stale: ${p}`);
+  }
 } finally { rmSync(temp,{recursive:true,force:true}); }
 if (base) {
   run(['git','rev-parse','--verify',`${base}^{commit}`]);
-  const changed = run(['git','diff','--name-only',base,'--',bundle]).trim().split('\n');
-  const untracked = run(['git','ls-files','--others','--exclude-standard','--',bundle]).trim().split('\n');
+  const changed = run(['git','diff','--name-only',base,'--',...bundles]).trim().split('\n');
+  const untracked = run(['git','ls-files','--others','--exclude-standard','--',...bundles]).trim().split('\n');
   const changedSet = new Set([...changed,...untracked]);
   for (const p of changedSet) {
     if (!p.endsWith('.md') || ['index.md','log.md'].includes(p.split('/').at(-1)!)) continue;
@@ -113,5 +139,5 @@ if (base) {
     requireThat(dir !== '.' && changedSet.has(join(dir,'log.md')), `Changed concept requires its nearest log in the diff: ${p}`);
   }
 } else console.log('No BASE_REF supplied: diff-aware log pairing not checked.');
-console.log(validation.trim());
-console.log(`Catalog checks passed: ${concepts.length} concepts, 22 source entries${complete ? ', complete coverage' : ''}.`);
+for (const validation of validations) console.log(validation.trim());
+console.log(`Catalog checks passed: ${concepts.length} concepts, 23 source entries across 2 bundles${complete ? ', complete coverage' : ''}.`);
